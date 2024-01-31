@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Gutur-Gu",
   description: "A world Classified Blog Webapp",
+  icons:{
+    icon:"/assets/images/molecule.png"
+  }
 };
 
 export default function RootLayout({
