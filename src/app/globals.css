@@ -85,3 +85,35 @@ rgba(19, 22, 28, 0.7) 100%
 .cl-footerActionLink{
     color: #ff7000;
 }
+.cl-pageScrollBox {
+    background-color: white;
+}
+.cl-headerSubtitle{
+    color: #0F1117;
+}
+.cl-navbar{
+    background-color: rgb(131, 10, 217);
+    color: white;
+    border-radius: 15px;
+}
+.cl-navbarButton {
+    background-color: white;
+}
+.cl-internal-1ho4xv{
+    color: white;
+}
+.cl-userPreviewSecondaryIdentifier{
+    color: white;
+}
+.cl-userButtonPopoverActionButtonText {
+ color: white;
+}
+.cl-internal-td400p{
+    color: white;
+}
+.cl-internal-1h80eck{
+    color: white;
+}
+.cl-internal-13zhnx0 {
+    color: #0F1117;
+}
