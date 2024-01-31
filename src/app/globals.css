@@ -44,5 +44,44 @@ rgba(19, 22, 28, 0.7) 100%
 }
 }
 
-
-
+.cl-card{
+    background-color:#0F1117;
+    box-shadow: 0 0 10px white;
+}
+.cl-internal-b3fm6y{
+    display: none;
+}
+.cl-headerTitle{
+    color: #ff7000;
+    text-align: center;
+}
+.cl-headerSubtitle{
+    color: white;
+    text-align: center;
+}
+.cl-socialButtonsBlockButtonText{
+    color: white;
+}
+.cl-dividerText{
+    color: white;
+}
+.cl-formFieldLabel{
+    color: white;
+}
+.cl-formFieldInput{
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+}
+.cl-footerActionText{
+    color: white;
+}
+.cl-formButtonPrimary{
+    background-color: #ff7000;
+}
+.cl-formButtonPrimary:hover{
+    background-color: #e2995f;
+}
+.cl-footerActionLink{
+    color: #ff7000;
+}

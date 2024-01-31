@@ -1,9 +1,12 @@
-import React from 'react'
-
-const Home = () => {
+import { UserButton } from "@clerk/nextjs";
+ 
+export default function Home() {
   return (
-    <div className='h1-bold'>teri maa ki chut</div>
+    <main className="flex justify-around">
+    <div className="h-screen">
+      <UserButton afterSignOutUrl="/"/>
+    </div>
+    <div className="h1-bold">Home</div>
+    </main>
   )
 }
-
-export default Home
