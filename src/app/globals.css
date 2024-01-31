@@ -117,3 +117,22 @@ rgba(19, 22, 28, 0.7) 100%
 .cl-internal-13zhnx0 {
     color: #0F1117;
 }
+.sr-only{
+    color: white;
+}
+.addBg{
+    background-color: #171a23f7;
+    width: 600px;
+    height: 47px;
+    padding: 0 15px;
+    gap: 5px;
+    border-radius: 10px;
+    margin-left: 50px;
+}
+.addBg>input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    margin-left: 8px;
+}

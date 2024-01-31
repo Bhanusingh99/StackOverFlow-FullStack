@@ -1,53 +1,70 @@
-import { SignedIn } from "@clerk/nextjs";
+'use client'
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import GlobalSearch from "../search/GlobalSearch";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { LogIn, LogOut, Menu } from "lucide-react";
+import { sidebarLinks } from "../../../constants";
+
+const NavContent = () => {
+  const pathName = usePathname();
+
+  return (
+    <section className="pt-10 flex flex-col">
+      {sidebarLinks.map((item, index) => {
+        const active =
+          (pathName.includes(item.route) && item.route.length > 1) ||
+          pathName === item.route;
+
+        return (
+          <Link
+            href={item.route}
+            key={index}
+            className={`flex gap-5 my-1 ml-2 py-2.5 px-2 ${
+              active
+                ? "bg-purple-600 base-bold text-white rounded-lg"
+                : "text-white"
+            }`}
+          >
+            <Image src={item.imgURL} alt={item.label} width={22} height={22} />
+            {item.label}
+          </Link>
+        );
+      })}
+    </section>
+  );
+};
 
 const Navbar = () => {
   return (
-    <nav
-      className="flex-between fixed z-50 p-6
-    background-dark200 w-full gap-5 sm:px-12"
-    >
-        <div className="flex gap-2">
-      <Sheet>
-        <SheetTrigger className="max-md:block hidden text-white">
-          <Menu />
-        </SheetTrigger>
-        <SheetContent side={"left"} className="background-dark200">
-          <SheetHeader>
-            <SheetTitle>Are you absolutely sure?</SheetTitle>
-            <SheetDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </SheetDescription>
-          </SheetHeader>
-        </SheetContent>
-      </Sheet>
-      <Link href="/" className="flex max-md:ml-2">
-        <Image
-          src="/assets/images/blog-logo.png"
-          height={28}
-          width={28}
-          alt="logo"
-        />
-        <p className="h3-bold ml-1 text-white max-sm:hidden">
-          Gutur-<span className="text-purple-400">Gu</span>
-        </p>
-      </Link>
+    <nav className="flex-between fixed z-50 px-6 py-4 background-dark200 w-full gap-5 sm:px-12">
+      <div className="flex gap-2">
+        <Link href="/" className="flex max-md:ml-2">
+          <Image
+            src="/assets/images/blog-logo.png"
+            height={28}
+            width={28}
+            alt="logo"
+          />
+          <p className="h3-bold ml-1 text-white max-sm:hidden">
+            Gutur-<span className="text-purple-400">Gu</span>
+          </p>
+        </Link>
       </div>
-      GlobalSearch
-      <div className="flex items-center">
+
+      <GlobalSearch />
+
+      {/* Mobile Navbar starts from Here */}
+      <div className="flex items-center gap-4">
+        <div className="ml-20">
         <SignedIn>
           <UserButton
             afterSignOutUrl="/"
@@ -58,6 +75,69 @@ const Navbar = () => {
             }}
           />
         </SignedIn>
+        </div>
+        
+      
+      <Sheet>
+        <SheetTrigger className="max-md:block hidden text-white border-r-none">
+          <Menu size={28} strokeWidth={2}/>
+        </SheetTrigger>
+        <SheetContent side={"left"} className="background-dark200">
+          <Link href="/" className="flex max-md:ml-2">
+            <Image
+              src="/assets/images/blog-logo.png"
+              height={28}
+              width={28}
+              alt="logo"
+            />
+            <p className="h3-bold ml-2 text-white">
+              Gutur-<span className="text-purple-400">Gu</span>
+            </p>
+          </Link>
+
+          <NavContent />
+
+          <div className="flex flex-col mt-8">
+            <SignedOut>
+              <Link href="/sign-in" className="purple_btn flex gap-4">
+                <LogIn />
+                Log-in
+              </Link>
+            </SignedOut>
+
+            <SignedOut>
+              <Link href="/sign-up" className="purple_btn flex gap-4">
+                <Image
+                  src="assets/icons/sign-up.svg"
+                  height={20}
+                  width={20}
+                  alt="sign-in-logo"
+                />
+                Sign-up
+              </Link>
+            </SignedOut>
+
+            <SignedIn>
+              <Link href="/sign-up" className="purple_btn flex gap-4">
+                <LogOut />
+                Log-out
+              </Link>
+            </SignedIn>
+          </div>
+        </SheetContent>
+      </Sheet>
+      </div>
+
+      <div className="flex max-lg:hidden">
+        <SignedOut>
+          <Link
+            href="/sign-in"
+            className="text-white border-[1.25px] border-purple-500 flex gap-1 items-center py-1.5 px-2.5 rounded-md"
+          >
+            <LogOut size={16} strokeWidth={1.75} />
+            <p className="text-[12px]">Log-in</p>
+          </Link>
+        </SignedOut>
       </div>
     </nav>
   );
