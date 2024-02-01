@@ -13,39 +13,12 @@ import {
 import { usePathname } from "next/navigation";
 import { LogIn, LogOut, Menu } from "lucide-react";
 import { sidebarLinks } from "../../../constants";
+import { NavContent } from "./NavContent";
 
-const NavContent = () => {
-  const pathName = usePathname();
-
-  return (
-    <section className="pt-10 flex flex-col">
-      {sidebarLinks.map((item, index) => {
-        const active =
-          (pathName.includes(item.route) && item.route.length > 1) ||
-          pathName === item.route;
-
-        return (
-          <Link
-            href={item.route}
-            key={index}
-            className={`flex gap-5 my-1 ml-2 py-2.5 px-2 ${
-              active
-                ? "bg-purple-600 base-bold text-white rounded-lg"
-                : "text-white"
-            }`}
-          >
-            <Image src={item.imgURL} alt={item.label} width={22} height={22} />
-            {item.label}
-          </Link>
-        );
-      })}
-    </section>
-  );
-};
 
 const Navbar = () => {
   return (
-    <nav className="flex-between fixed z-50 px-6 py-4 background-dark200 w-full gap-5 sm:px-12">
+    <nav className="flex-between fixed z-50 px-6 py-5 background_dark200 w-full gap-5 sm:px-12">
       <div className="flex gap-2">
         <Link href="/" className="flex max-md:ml-2">
           <Image

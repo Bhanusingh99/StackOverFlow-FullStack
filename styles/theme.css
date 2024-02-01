@@ -5,7 +5,7 @@
 .background_dark100 {
 @apply bg-dark-100;
 }
-.background-dark200{
+.background_dark200{
 @apply bg-dark-200;
 }
 .background_dark300 {
@@ -29,44 +29,44 @@
 .backgrounddark300 {
 @apply bg-dark-300 !important;
 }
-.textlight900 {
+.text_light900 {
 @apply text-light-900 !important;
 }
-.text-light900 {
+.text_light900 {
 @apply text-light-900;
 }
-.text-light800 {
+.text_light800 {
 @apply text-light-800 !important;
 }
-.text-light700 {
+.text_light700 {
 @apply text-light-700;
 }
-.text-light700 {
+.text_light700 {
 @apply text-light-700;
 }
-.text-light700 {
+.text_light700 {
 @apply text-light-700 !important;
 }
-.text-light500 {
+.text_light500 {
 @apply text-light-500;
 }
-.text-light900 {
+.text_light900 {
 @apply text-light-900 !important;
 }
-.text-light800 {
+.text_light800 {
 @apply text-light-800;
 }
-.text-light500 {
+.text_light500 {
 @apply text-light-500 !important;
 }
-.text-light500 {
+.text_light500 {
 @apply text-light-500;
 }
 
-.light-border {
+.light_border {
 @apply border-light-800 dark:border-dark-300;
 }
-.light-border-2 {
+.light_border-2 {
 @apply border-light-700 dark:border-dark-400 !important;
 }
 .h1-bold {

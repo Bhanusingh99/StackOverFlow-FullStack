@@ -136,3 +136,30 @@ rgba(19, 22, 28, 0.7) 100%
     color: white;
     margin-left: 8px;
 }
+.rightsidebar{
+    width: 350px;
+}
+.top-questions{
+    color: white;
+    margin-bottom:18px;
+    margin-top: -2.5rem;
+}
+.texts{
+    margin-bottom: 24px;
+}
+.title{
+    font-size: 14px;
+    color: rgb(227, 227, 254);
+}
+.tags{
+    margin-top: 1rem;
+}
+.popTags{
+    margin-bottom: 30px;
+}
+.maintag{
+    background-color: #1e222e;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+}

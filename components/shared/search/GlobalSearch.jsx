@@ -12,7 +12,7 @@ const GlobalSearch = () => {
           width={20}
           alt='search logo'
         />
-        <input className='w-full' />
+        <input className='w-full' placeholder='Search Globlly'/>
       </div>
     </div>
   );
