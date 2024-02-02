@@ -27,7 +27,7 @@ const Navbar = () => {
             width={28}
             alt="logo"
           />
-          <p className="h3-bold ml-1 text-white max-sm:hidden">
+          <p className="h3-bold ml-1 text-white">
             Gutur-<span className="text-purple-400">Gu</span>
           </p>
         </Link>

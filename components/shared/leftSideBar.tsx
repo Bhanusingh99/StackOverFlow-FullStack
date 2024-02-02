@@ -11,7 +11,7 @@ const LeftSidebar = () => {
     const pathName = usePathname();
   return (
     <section className="background_dark200 light-border fixed left-0 top-0 max-lg:pt-[6rem]
-    flex h-screen w-fit flex-col justify-between  overflow-y-auto p-5 pt-32 max-sm:hidden lg:w-[220px]">
+    flex h-screen w-fit flex-col justify-between  overflow-y-auto p-5 pt-32 max-sm:hidden lg:w-[275px]">
         <div className='flex flex-1 flex-col gap-1 '>
             {
                 sidebarLinks.map((items) => {

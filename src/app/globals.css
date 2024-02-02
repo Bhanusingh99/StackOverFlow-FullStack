@@ -120,7 +120,7 @@ rgba(19, 22, 28, 0.7) 100%
 .sr-only{
     color: white;
 }
-.addBg{
+/* .addBg{
     background-color: #171a23f7;
     width: 600px;
     height: 47px;
@@ -128,14 +128,14 @@ rgba(19, 22, 28, 0.7) 100%
     gap: 5px;
     border-radius: 10px;
     margin-left: 50px;
-}
-.addBg>input{
+} */
+/* .addBg>input{
     border: none;
     outline: none;
     background-color: transparent;
-    color: white;
+    color: black;
     margin-left: 8px;
-}
+} */
 .rightsidebar{
     width: 350px;
 }
@@ -163,3 +163,9 @@ rgba(19, 22, 28, 0.7) 100%
     border-radius: 5px;
     font-size: 12px;
 }
+@media (min-width: 1200px) {
+    /* Hide the element when screen is xl or larger */
+    .rightsidebar {
+      display: none;
+    }
+  }

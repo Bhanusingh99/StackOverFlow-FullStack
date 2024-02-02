@@ -56,9 +56,9 @@ const popularTags = [
 
 const RightSidebar = () => {
   return (
-    <section className="background_dark200 fixed right-0 top-0 flex 
+    <section className="background_dark200 sticky right-0 top-0 flex 
     h-screen rightsidebar flex-col gap-6 overflow-y-auto
-    p-6 pt-36 max-xl:hidden ">
+    p-6 pt-36 max-xl:hidden">
         <div>
             <h1 className='top-questions h3-bold'>
                 Top Questions
