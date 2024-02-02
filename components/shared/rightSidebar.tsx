@@ -28,27 +28,27 @@ const title = [
 
 const popularTags = [
     {
-        _id:1,
+        _id:"1",
         name:"Javascript",
         totalQuestion:5
     },
     {
-        _id:2,
+        _id:"2",
         name:"ReactJs",
         totalQuestion:5
     },
     {
-        _id:3,
+        _id:"3",
         name:"NextJs",
         totalQuestion:5
     },
     {
-        _id:4,
+        _id:"4",
         name:"NodeJs",
         totalQuestion:5
     },
     {
-        _id:5,
+        _id:"5",
         name:"Javascript",
         totalQuestion:5
     }

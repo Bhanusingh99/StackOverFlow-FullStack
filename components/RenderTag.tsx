@@ -2,16 +2,15 @@ import Link from 'next/link'
 import React from 'react'
 
 interface Props {
-  key: number;
-  id: number;
+  id: String;
   totalQuestion?: number;
   name: string;
-  showCount: boolean;
+  showCount?: boolean;
 }
 
-const RenderTag = ({key,id,name,totalQuestion,showCount}:Props) => {
+const RenderTag = ({id,name,totalQuestion,showCount}:Props) => {
   return (
-    <Link href={`/tags/${id}`} className='flex justify-between gap-2 text-white'>
+    <Link href={`/tags/${id}`} className='flex justify-between gap-2 text-white' key={`${id}`}>
         <p className='maintag'>{name}</p>
         {showCount && (<p className='text-[12px]'>{totalQuestion}</p>)}
     </Link>

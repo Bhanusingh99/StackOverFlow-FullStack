@@ -23,7 +23,7 @@ const LeftSidebar = () => {
                             active
                               ? "bg-purple-600 text-white rounded-lg"
                               : "text-white"
-                          }`}>
+                          }`} key={items.label}>
                             <Image src={items.imgURL} height={26} width={26} alt={items.label} />
                             <p className='max-lg:hidden text-white'>{items.label}</p>
                         </Link>

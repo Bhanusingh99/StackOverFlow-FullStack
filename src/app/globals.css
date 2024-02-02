@@ -142,18 +142,16 @@ rgba(19, 22, 28, 0.7) 100%
 .top-questions{
     color: white;
     margin-bottom:18px;
-    margin-top: -2.5rem;
+    margin-top: -1.5rem;
 }
-.texts{
-    margin-bottom: 24px;
-}
+
 .title{
-    font-size: 14px;
+    font-size: 13px;
     color: rgb(227, 227, 254);
 }
-.tags{
+/* .tags{
     margin-top: 1rem;
-}
+} */
 .popTags{
     margin-bottom: 30px;
 }
