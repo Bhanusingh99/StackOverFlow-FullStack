@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react'
 import RenderTag from '../RenderTag';
 import Matric from '../shared/Matric';
+import { formatNumber, getTimeStamp } from '../../utils';
 
 interface Props {
     title: string;
@@ -25,8 +26,8 @@ const QuestionCard = ({_id,title,tags,author,answer,createdAt,views,upVotes}:Pro
     <div className='background_dark300 rounded-[10px] p-9 sm:px-11'>
       <div className='flex flex-col-reverse items-start justify-between gap-5 sm:flex-row'>
           <div>
-            <span className='text-white line-clamp-1 sm:hidden'>
-              {String(createdAt)}
+            <span className='text-white line-clamp-1 sm:hidden text-[12px]'>
+              {getTimeStamp(createdAt)}
             </span>
             <Link href={`/question/${_id}`} className='h3-bold text-white line-clamp-1 flex-1'>
               {title}
@@ -51,7 +52,7 @@ const QuestionCard = ({_id,title,tags,author,answer,createdAt,views,upVotes}:Pro
             value={author.name}
             href={`/profile/${author._id}`}
             isAuthor
-            title="-asked 1 hour ago"
+            title={`-asked ${getTimeStamp(createdAt)}`}
             textStyle=""
             />
 
@@ -59,21 +60,21 @@ const QuestionCard = ({_id,title,tags,author,answer,createdAt,views,upVotes}:Pro
             <Matric
             imageUrl="/assets/icons/like.svg"
             alt="Search"
-            value={upVotes}
+            value={formatNumber(upVotes)}
             title="Like"
             textStyle=""
             />
             <Matric
             imageUrl="/assets/icons/message.svg"
             alt="answers"
-            value={answer.length}
+            value={formatNumber(answer.length)}
             title="answer"
             textStyle=""
             />
             <Matric
             imageUrl="/assets/icons/eye.svg"
             alt="views"
-            value={views}
+            value={formatNumber(views)}
             title="views"
             textStyle=""
             />
