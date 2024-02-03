@@ -12,7 +12,7 @@
 @apply bg-dark-300;
 }
 .purple_btn{
-    @apply text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg px-6 py-2.5 text-center me-2 mb-3.5;
+    @apply text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br  font-medium rounded-lg px-6 py-3 text-center me-2 mb-3.5;
 }
 .background_dark400 {
 @apply bg-dark-400 !important;
