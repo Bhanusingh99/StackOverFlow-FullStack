@@ -1,6 +1,6 @@
 "use client";
-import React, { useRef } from 'react';
- import { Editor } from '@tinymce/tinymce-react';
+import React, { useRef, useState } from "react";
+import { Editor } from "@tinymce/tinymce-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,9 +16,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { QuestionSchema } from "../../utils/validation";
+import { X } from "lucide-react";
+import { createQuestion } from "../../lib/actions/questions.action";
+
+const type:any = 'create'
 
 const QuestionForm = () => {
-    const editorRef = useRef(null);
+  const [isSubmiting,setIsSubmiting] = useState(false) 
+  const editorRef = useRef(null);
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
     defaultValues: {
@@ -30,10 +35,54 @@ const QuestionForm = () => {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof QuestionSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    setIsSubmiting(true)
+
+    try {
+      //Make a async call to our api to create a question
+      //constain all form Data
+
+      // Navigate to Home Page
+      createQuestion({})
+    } catch (error) {
+      
+    } finally{
+      setIsSubmiting(false)
+    }
   }
+
+  function handleKeyInput(
+    e: React.KeyboardEvent<HTMLInputElement>,
+    field: any
+  ) {
+    if (e.key === "Enter" && field.name === "tag") {
+      e.preventDefault();
+
+      const tagInput = e.target as HTMLInputElement;
+      const tagValue = tagInput.value.trim();
+
+      if (tagValue !== "") {
+        if (tagValue.length > 15) {
+          return form.setError("tag", {
+            type: "required",
+            message: "Tag must be lest then 15 Character",
+          });
+        }
+        if (!field.value.includes(tagValue as never)) {
+          form.setValue("tag", [...field.value, tagValue]);
+          tagInput.value = "";
+          form.clearErrors("tag");
+        }
+      } else {
+        form.trigger();
+      }
+    }
+  }
+
+  const removeTag = (tag: string, field: any) => {
+    const newTag = field.value.filter((t: string) => t !== tag);
+
+    form.setValue("tag", newTag);
+  };
   return (
     <div>
       <Form {...form}>
@@ -51,6 +100,7 @@ const QuestionForm = () => {
                 </FormLabel>
                 <FormControl className="mt-3 py-2">
                   <Input
+                    placeholder="Enter Question Title..."
                     {...field}
                     className="bg-dark-300 py-4 px-4 text-white text-[16px] min-h-[50px]"
                   />
@@ -70,32 +120,53 @@ const QuestionForm = () => {
             render={({ field }) => (
               <FormItem className="flex flex-col w-full">
                 <FormLabel className="text-white">
-                Detail explaination of Your problem <span className="text-red-500"> *</span>                </FormLabel>
+                  Detail explaination of Your problem{" "}
+                  <span className="text-red-500"> *</span>{" "}
+                </FormLabel>
                 <FormControl className="mt-3 py-2">
-                <Editor
-                apiKey={process.env.NEXT_PUBLIC_EDITOR_API_KEY}
-         onInit={(evt, editor) => 
-            //@ts-ignore
-            editorRef.current = editor}
-         initialValue=""
-         init={{
-           height: 500,
-           menubar: false,
-           plugins: [
-             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'print', 'preview', 'anchor',
-             'searchreplace', 'visualblocks', 'codesample', 'fullscreen',
-             'insertdatetime', 'media', 'table'
-           ],
-           toolbar: 'undo redo |' +
-           'codesample | bold italic backcolor | alignleft aligncenter ' +
-           'alignright alignjustify | bullist numlist outdent indent | ' +
-           'removeformat | help',
-           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-         }}
-       />
+                  <Editor
+                    apiKey={process.env.NEXT_PUBLIC_EDITOR_API_KEY}
+                    onInit={(evt, editor) =>
+                      //@ts-ignore
+                      (editorRef.current = editor)
+                    }
+                    initialValue=""
+                    onBlur={field.onBlur}
+                    onEditorChange={(content) => field.onChange(content)}
+                    init={{
+                      height: 500,
+                      menubar: false,
+                      plugins: [
+                        "advlist",
+                        "autolink",
+                        "lists",
+                        "link",
+                        "image",
+                        "charmap",
+                        "print",
+                        "preview",
+                        "anchor",
+                        "searchreplace",
+                        "visualblocks",
+                        "codesample",
+                        "fullscreen",
+                        "insertdatetime",
+                        "media",
+                        "table",
+                      ],
+                      toolbar:
+                        "undo redo |" +
+                        "codesample | bold italic backcolor | alignleft aligncenter " +
+                        "alignright alignjustify | bullist numlist outdent indent | " +
+                        "removeformat | help",
+                      content_style:
+                        "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                    }}
+                  />
                 </FormControl>
                 <FormDescription className="text-light-400">
-                Introduce the problem and extend on what you put in the title. minimum 20 characters
+                  Introduce the problem and extend on what you put in the title.
+                  minimum 20 characters
                 </FormDescription>
                 <FormMessage className="text-red-500" />
               </FormItem>
@@ -108,26 +179,59 @@ const QuestionForm = () => {
             render={({ field }) => (
               <FormItem className="flex flex-col w-full">
                 <FormLabel className="text-white">
-                Tags<span className="text-red-500"> *</span>
+                  Tags<span className="text-red-500"> *</span>
                 </FormLabel>
                 <FormControl className="mt-3 py-2">
-                  <Input
-                    {...field}
-                    placeholder="Add tags"
-                    className="bg-dark-300 py-4 px-4 text-white text-[16px] min-h-[50px]"
-                  />
+                  <>
+                    <Input
+                      placeholder="Add tags"
+                      className="bg-dark-300 py-4 px-4 text-white text-[16px] min-h-[50px]"
+                      onKeyDown={(e) => handleKeyInput(e, field)}
+                    />
+                    <div className="flex-start mt-2.5 gap-3">
+                      {field.value.map((tag) => (
+                        <button
+                          key={tag}
+                          className="flex items-center px-1 py-1 gap-1 bg-purple-500 rounded-[5px]"
+                        >
+                          <p className="text-white text-[14px]">{tag}</p>
+                          <X
+                            size={16}
+                            color="white"
+                            className="cursor-pointer"
+                            onClick={() => removeTag(tag, field)}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </>
                 </FormControl>
                 <FormDescription className="text-light-400">
-                Add upto 3 tags to decribe what your question about. you need to pree enter to add a tag
+                  Add upto 3 tags to decribe what your question about. you need
+                  to pree enter to add a tag
                 </FormDescription>
                 <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />
 
-          <Button type="submit" className="bg-purple-500 py-4 px-2 
-          rounded-[10px] min-h-[50px] text-[18px] text-white">
-            Submit
+          <Button
+            type="submit"
+            className="bg-purple-500 py-2 w-fit px-6
+          rounded-[10px] min-h-[45px] text-[18px] text-white"
+          disabled={isSubmiting}
+          >
+            {
+              isSubmiting ? (
+                <>
+                {type === 'edit' ? 'editing' : 'Posting'}
+                </>
+              ) : (
+                <>
+                {type === 'edit' ? 'Edit Post' : 'Ask Question'}
+                </>
+              )
+            }
           </Button>
         </form>
       </Form>
