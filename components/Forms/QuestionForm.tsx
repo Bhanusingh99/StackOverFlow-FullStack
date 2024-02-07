@@ -18,12 +18,21 @@ import { Input } from "@/components/ui/input";
 import { QuestionSchema } from "../../utils/validation";
 import { X } from "lucide-react";
 import { createQuestion } from "../../lib/actions/questions.action";
+import { useRouter, usePathname } from "next/navigation";
 
 const type:any = 'create'
 
-const QuestionForm = () => {
+interface Props{
+  mongoUserId:String
+}
+
+const QuestionForm = ({mongoUserId}:Props) => {
   const [isSubmiting,setIsSubmiting] = useState(false) 
+  const router = useRouter();
+  const pathName = usePathname();
+
   const editorRef = useRef(null);
+
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
     defaultValues: {
@@ -34,7 +43,7 @@ const QuestionForm = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof QuestionSchema>) {
+ async function onSubmit(values: z.infer<typeof QuestionSchema>) {
     setIsSubmiting(true)
 
     try {
@@ -42,7 +51,15 @@ const QuestionForm = () => {
       //constain all form Data
 
       // Navigate to Home Page
-      createQuestion({})
+      await createQuestion({
+        title:values.title,
+        content:values.explaination,
+        tags:values.tag,
+        author:JSON.parse(mongoUserId)
+      })
+
+      router.push('/')
+      console.log(values.title,values.explaination,values.tag)
     } catch (error) {
       
     } finally{
