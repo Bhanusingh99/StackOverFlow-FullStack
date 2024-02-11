@@ -3,8 +3,11 @@
 import { Question } from "../../Model/question.model";
 import { Tag } from "../../Model/tag.model";
 import { connectionToDb } from "../mongoose"
+import { GetQuestionsParams, CreateQuestionParams } from "./shared.types";
 
-export async function createQuestion(params:any) {
+export async function getQuestions(params:GetQuestionsParams){}
+
+export async function createQuestion(params:CreateQuestionParams) {
     try {
         connectionToDb();
 
