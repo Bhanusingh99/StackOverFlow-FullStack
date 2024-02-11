@@ -1,11 +1,27 @@
 'use server'
 
+import { revalidatePath } from "next/cache";
 import { Question } from "../../Model/question.model";
 import { Tag } from "../../Model/tag.model";
+import { User } from "../../Model/user.model";
 import { connectionToDb } from "../mongoose"
 import { GetQuestionsParams, CreateQuestionParams } from "./shared.types";
 
-export async function getQuestions(params:GetQuestionsParams){}
+export async function getQuestions(params:GetQuestionsParams){
+    connectionToDb();
+
+    try {
+        const question = await Question.find({})
+        .populate({path:"tags",model:Tag})
+        .populate({path:"path",model:User})
+        .sort({createdAt:-1})
+
+      return {question}  
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
 
 export async function createQuestion(params:CreateQuestionParams) {
     try {
@@ -34,6 +50,8 @@ export async function createQuestion(params:CreateQuestionParams) {
         await Question.findByIdAndUpdate(question._id,{
             $push:{tags:{$each:tagDoecument}}
         })
+
+        revalidatePath(path)
     } catch (error) {
         console.log(error)
     }

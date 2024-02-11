@@ -55,7 +55,8 @@ const QuestionForm = ({mongoUserId}:Props) => {
         title:values.title,
         content:values.explaination,
         tags:values.tag,
-        author:JSON.parse(mongoUserId)
+        author:JSON.parse(mongoUserId),
+        path:pathName,
       })
 
       router.push('/')
