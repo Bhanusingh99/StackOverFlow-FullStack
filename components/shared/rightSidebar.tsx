@@ -70,6 +70,7 @@ const RightSidebar = () => {
                             <Link href={items.url} className='flex cursor-pointer items-center justify-between gap-7 texts'>
                                 <p className='body-medium title'>{items.heading}</p>
                                 <Image 
+                                key={items.url}
                                 src="/assets/icons/chevron-right.svg"
                                 height={15}
                                 width={15}
