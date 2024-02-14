@@ -47,6 +47,7 @@ const QuestionCard = ({_id,title,tags,author,answer,createdAt,views,upVotes}:Pro
       </div>
       <div className='flex-between mt-6 w-full flex-wrap gap-3'> 
            <Matric
+            key={_id}
             imageUrl="/assets/icons/avatar.svg"
             alt="user"
             value={author.name}
@@ -58,6 +59,7 @@ const QuestionCard = ({_id,title,tags,author,answer,createdAt,views,upVotes}:Pro
 
             
             <Matric
+            key={_id}
             imageUrl="/assets/icons/like.svg"
             alt="Search"
             value={formatNumber(upVotes)}
@@ -65,6 +67,7 @@ const QuestionCard = ({_id,title,tags,author,answer,createdAt,views,upVotes}:Pro
             textStyle=""
             />
             <Matric
+            key={_id}
             imageUrl="/assets/icons/message.svg"
             alt="answers"
             value={formatNumber(answer.length)}
@@ -72,6 +75,7 @@ const QuestionCard = ({_id,title,tags,author,answer,createdAt,views,upVotes}:Pro
             textStyle=""
             />
             <Matric
+            key={_id}
             imageUrl="/assets/icons/eye.svg"
             alt="views"
             value={formatNumber(views)}

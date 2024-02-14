@@ -70,7 +70,6 @@ const RightSidebar = () => {
                             <Link href={items.url} className='flex cursor-pointer items-center justify-between gap-7 texts'>
                                 <p className='body-medium title'>{items.heading}</p>
                                 <Image 
-                                key={items.url}
                                 src="/assets/icons/chevron-right.svg"
                                 height={15}
                                 width={15}
@@ -87,10 +86,10 @@ const RightSidebar = () => {
             <h3 className='h3-bold text-white mt-5 popTags'>Popular Tags</h3>
             <div className='mt-7 flex flex-col gap-4'>
                 {
-                    popularTags.map((items) => {
+                    popularTags.map((items,index) => {
                         return(
                             <RenderTag 
-                            key={items._id}
+                            key={index}
                             id={items._id}
                             name={items.name}
                             totalQuestion={items.totalQuestion}
