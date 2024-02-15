@@ -65,9 +65,9 @@ const RightSidebar = () => {
             </h1>
             <div className='mt-2 mb-5 flex w-full flex-col gap-8'>
                 {
-                    title.map((items) => {
+                    title.map((items,index) => {
                         return(
-                            <Link href={items.url} className='flex cursor-pointer items-center justify-between gap-7 texts'>
+                            <Link href={items.url} key={index} className='flex cursor-pointer items-center justify-between gap-7 texts'>
                                 <p className='body-medium title'>{items.heading}</p>
                                 <Image 
                                 src="/assets/icons/chevron-right.svg"
